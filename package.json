@@ -1,0 +1,13 @@
+{
+	"name": "hogarth_framework",
+	"version": "0.0.1",
+	"author": "Mate Marschalko <mate.marschalko@hogarthww.com>",
+	"devDependencies": {
+		"grunt": "~0.4.2",
+		"grunt-contrib-watch": "~0.5.1",
+		"grunt-contrib-uglify": "~0.2.2",
+		"grunt-contrib-clean": "~0.5.0",
+		"grunt-contrib-concat": "~0.3.0",
+		"grunt-contrib-compass": "~0.4.1"
+	}
+}

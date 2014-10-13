@@ -1,0 +1,42 @@
+@import "compass";
+@import "susy";
+@import 
+		"core/mixins",
+		"core/normalize";
+
+//
+//// Variables and settings
+
+
+//
+//// BASE RULES
+
+body {
+	background-color: white;
+	color: #333;
+}
+
+// Add Base Rules to H1...6, P, A, etc.
+// set font sizes and colours
+
+
+// LAYOUT RULES
+@import
+		"layout/header",
+		"layout/content",
+		"layout/footer";
+
+
+// MODULE RULES
+// @import 
+//		"modules/_";
+
+
+// STATE RULES
+// @import 
+//		"states/_";
+
+
+// THEME RULES
+// @import 
+//		"themes/_";
