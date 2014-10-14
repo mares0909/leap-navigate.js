@@ -11,6 +11,12 @@ LeapApp.monitor = (function (app) {
 		h: 9
 	};
 
+	// resolution of monitor
+	obj.resolution = {
+		w: 1920,
+		h: 1080
+	};
+
 	// ratio calculation coefficient
 	obj.ratioCoeff = Math.sqrt(obj.ratio.w * obj.ratio.w + obj.ratio.h * obj.ratio.h);
 
@@ -23,6 +29,12 @@ LeapApp.monitor = (function (app) {
 	// measurements of monitor in mms
 	obj.w = obj.d * obj.ratioPcnt.w;
 	obj.h = obj.d * obj.ratioPcnt.h;
+
+	// dot per inch
+	obj.dpm = obj.resolution.w / (obj.w / 25.4);
+
+	// dot per mm
+	obj.dpm = obj.resolution.w / obj.w;
 
 	return obj;
 

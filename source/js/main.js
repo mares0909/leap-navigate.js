@@ -1,11 +1,13 @@
 
 var LeapApp = (function () {
 
+	var app;
+
 	// Main application sequence
 	var main = function () {
 
 		// Declare self as app object
-		var app = LeapApp;
+		app = LeapApp;
 
 		// Run the Leap Loop
 		Leap.loop(loop);
@@ -19,21 +21,22 @@ var LeapApp = (function () {
 			finger;
 
 		// If 1 hand and 1 pointing finger is in the space
-		if(space.hands[0] && space.hands[0].fingers[0]) {
+		if(space.hands[0] && space.hands[0].fingers.length > 0) {
 
-			finger = space.hands[0].fingers[0];
+			indexFinger = space.hands[0].indexFinger;
 
 			// If the finger is in a pointing posture
-			if(finger.extended) {
+			if(indexFinger.extended) {
 				// Calculate the cursor coords where the finger is pointing on the screen
-				cursorPos = app.sensor.calucalteCoords( finger );
+				cursorPos = app.sensor.calculateCoords( indexFinger );
+
+				// Move cursor to the calculated coords
+				console.log(app.monitor.dpm);
+				cursor.style.left = (cursorPos.xCoord * app.monitor.dpm) + "px"; 
+				cursor.style.top  = (cursorPos.yCoord * app.monitor.dpm) + "px"; 
 			}
 
 		}
-
-		// Move cursor to the calculated coords
-		cursor.style.left = cursorPos.xCoord; 
-		cursor.style.top  = cursorPos.yCoord;
 	};
 
 	return {
