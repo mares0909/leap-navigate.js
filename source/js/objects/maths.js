@@ -1,8 +1,8 @@
 LeapApp.maths = (function (app) {
 
 
-   return {
-      
-   };
+	return {
+
+	};
 
 })(LeapApp);

@@ -11,7 +11,7 @@ LeapApp.monitor = (function (app) {
 		h: 9
 	};
 
-	// ratio calculation coefficiont
+	// ratio calculation coefficient
 	obj.ratioCoeff = Math.sqrt(obj.ratio.w * obj.ratio.w + obj.ratio.h * obj.ratio.h);
 
 	// ratio in percentages

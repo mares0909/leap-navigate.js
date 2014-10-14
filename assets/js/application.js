@@ -15,8 +15,7 @@ var LeapApp = (function () {
    var loop = function(space){
       // var m = document.getElementById('monitor');
       // if(space.hands[0] && space.hands[0].fingers[0]) {
-      //          m.innerHTML = space.hands[0].fingers[0].tipPosition[0] / 10 + "cm";
-         
+      //    m.innerHTML = space.hands[0].fingers[0].tipPosition[0] / 10 + "cm";
       // }
    };
 

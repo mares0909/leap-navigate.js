@@ -18,6 +18,13 @@ LeapApp.sensor = (function (app) {
 		h : 0,
 		v : - obj.w * 1,
 		d : - obj.w * 2
+	};
+
+	
+
+	// Pointing finger tip and origin positions
+	var getX = function(){
+		var finger = findFinger();
 	}
 
 	return obj;
