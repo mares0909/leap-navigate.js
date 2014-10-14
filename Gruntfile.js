@@ -49,7 +49,7 @@ module.exports = function(grunt) {
 			},
 			javascript: {
 				// the files to concatenate
-				src: ['source/js/plugin/*.js', 'source/js/componenets/*.js', 'source/js/objects/*.js', 'source/js/*.js'],
+				src: ['source/js/plugin/*.js', 'source/js/main.js', 'source/js/componenets/*.js', 'source/js/objects/*.js', 'source/js/init.js',],
 				// the location of the resulting JS file
 				dest: 'assets/js/application.js'
 			}
@@ -65,6 +65,27 @@ module.exports = function(grunt) {
 					'assets/js/application.min.js': ['<%= concat.javascript.dest %>']
 				}
 			}
+		},
+		autoprefixer: {
+			options: {
+				// Task-specific options go here.
+			},
+			multiple_files: {
+				expand: true,
+				flatten: true,
+				src: 'assets/css/*.css',
+				dest: 'assets/css/'
+			}
+		},
+		cmq: {
+			options: {
+				log: false
+			},
+			assets: {
+				files: {
+				'assets/css/': ['assets/css/*.css']
+				}
+			}
 		}
 	});
 
@@ -74,6 +95,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-compass');
+	grunt.loadNpmTasks('grunt-autoprefixer');
+	grunt.loadNpmTasks('grunt-combine-media-queries');
 
 	// Default task(s).
 	grunt.registerTask('default', ['watch']);
@@ -81,12 +104,15 @@ module.exports = function(grunt) {
 	grunt.registerTask('development', [
 		'clean:preBuild',
 		'compass:development',
+		'autoprefixer:multiple_files',
 		'concat:javascript'
 	]);
 
 	grunt.registerTask('build', [
 		'clean:preBuild',
 		'compass:production',
+		'autoprefixer:multiple_files',
+		'cmq:assets',
 		'concat:javascript',
 		'uglify:javascript'
 	]);
