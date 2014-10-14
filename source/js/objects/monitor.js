@@ -2,8 +2,8 @@ LeapApp.monitor = (function (app) {
 	
 	var obj = {};
 
-	// diameter of monitor in cms
-	obj.d = 54.61;
+	// diameter of monitor in mms
+	obj.d = 546.1;
 
 	// ratio of monitor
 	obj.ratio = {
@@ -20,7 +20,7 @@ LeapApp.monitor = (function (app) {
 		h: obj.ratio.h / obj.ratioCoeff
 	};
 
-	// measurements of monitor in cms
+	// measurements of monitor in mms
 	obj.w = obj.d * obj.ratioPcnt.w;
 	obj.h = obj.d * obj.ratioPcnt.h;
 
