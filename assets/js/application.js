@@ -31,9 +31,7 @@ var LeapApp = (function () {
 				cursorPos = app.sensor.calculateCoords( indexFinger );
 
 				// Move cursor to the calculated coords
-				console.log(app.monitor.dpm);
-				cursor.style.left = (cursorPos.xCoord * app.monitor.dpm) + "px"; 
-				cursor.style.top  = (cursorPos.yCoord * app.monitor.dpm) + "px"; 
+				cursor.style.webkitTransform = "translate3d(" + (cursorPos.xCoord * app.monitor.dpm) + "px, " + (cursorPos.yCoord * -app.monitor.dpm) + "px, 0)"; 
 			}
 
 		}
@@ -107,7 +105,7 @@ var LeapApp = (function () {
 	obj.distance = {
 		h : 0,
 		v : - obj.w * 1,
-		d : - obj.w * 2,
+		d : + obj.w * 3,
 		// Definition for the for loop
 		def : ["h", "v", "d"]
 	};
@@ -127,11 +125,11 @@ var LeapApp = (function () {
 		var distance = fingerBaseAbsolute[2],
 			fingerAngle = Math.abs(fingerAngles[direction]),
 			fingerDirection = fingerAngles[direction] < 0 ? -1 : +1,
-			fingerBase = fingerBaseAbsolute[direction],
+			fingerBaseC = fingerBaseAbsolute[direction],
 			monitorAngle = Math.PI - (Math.PI / 2) - fingerAngle,
 			monitorProjection = distance / Math.tan(monitorAngle);
 
-		return fingerBase + (fingerDirection * monitorProjection);
+		return fingerBaseC + (fingerDirection * monitorProjection);
 	}
 
 	// Calculating the cursor coords where the finger is pointing on the screen
@@ -143,15 +141,21 @@ var LeapApp = (function () {
 			fingerBase[i] = finger.mcpPosition[i];
 			fingerTip[i] = finger.stabilizedTipPosition[i];
 
-			// Calculating and storing the absolute X, Y, Z coords of the finger base and tip relative to the screen position
-			fingerBaseAbsolute[i] = fingerBase[i] + obj.distance[ obj.distance.def[i] ] + (app.monitor.w / 2);
-			fingerTipAbsolute[i]  = fingerTip[i]  + obj.distance[ obj.distance.def[i] ] + (app.monitor.w / 2);
-
-			// Calculating and storing the finger angles in radians
-			fingerAngles[0] = finger.direction[0];
-			fingerAngles[1] = finger.direction[1];
-
 		}
+
+		// Calculating and storing the absolute X, Y, Z coords of the finger base and tip relative to the screen position
+		fingerBaseAbsolute[0] = fingerBase[0] + (app.monitor.w / 2) - obj.distance[ obj.distance.def[0] ];
+		fingerTipAbsolute[0]  = fingerTip[0] + (app.monitor.w / 2) - obj.distance[ obj.distance.def[0] ];
+
+		fingerBaseAbsolute[1] = fingerBase[1] + obj.distance.v;
+		fingerTipAbsolute[1]  = fingerTip[1] + obj.distance.v;
+
+		fingerBaseAbsolute[2] = obj.distance.d + fingerBase[2];
+		fingerTipAbsolute[2]  = obj.distance.d + fingerBase[2];
+
+		// Calculating and storing the finger angles in radians
+		fingerAngles[0] = finger.direction[0];
+		fingerAngles[1] = finger.direction[1];
 
 		return {
 			xCoord: obj.getCoords(0),

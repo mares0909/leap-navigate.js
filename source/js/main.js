@@ -31,9 +31,7 @@ var LeapApp = (function () {
 				cursorPos = app.sensor.calculateCoords( indexFinger );
 
 				// Move cursor to the calculated coords
-				console.log(app.monitor.dpm);
-				cursor.style.left = (cursorPos.xCoord * app.monitor.dpm) + "px"; 
-				cursor.style.top  = (cursorPos.yCoord * app.monitor.dpm) + "px"; 
+				cursor.style.webkitTransform = "translate3d(" + (cursorPos.xCoord * app.monitor.dpm) + "px, " + (cursorPos.yCoord * -app.monitor.dpm) + "px, 0)"; 
 			}
 
 		}
