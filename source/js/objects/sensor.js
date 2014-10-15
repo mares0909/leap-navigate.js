@@ -1,6 +1,8 @@
-LeapApp.sensor = (function (app) {
+LeapApp.Sensor = function() {
 
 	var obj = {};
+
+	var app = LeapApp;
 
 	// Sensor measurements in mms
 	obj.w = 76.20;
@@ -75,4 +77,4 @@ LeapApp.sensor = (function (app) {
 
 	return obj;
 
-})(LeapApp);
+}
